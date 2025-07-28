@@ -1,0 +1,9 @@
+[
+  { "main": "Butter Chicken", "side": "Garlic Naan", "drink": "Mango Lassi", "calories": 720, "rating": 4.5, "taste": "Savory" },
+  { "main": "Sushi Roll", "side": "Miso Soup", "drink": "Green Tea", "calories": 580, "rating": 4.2, "taste": "Sweet" },
+  { "main": "Spicy Ramen", "side": "Spring Rolls", "drink": "Lemonade", "calories": 650, "rating": 4.3, "taste": "Spicy" },
+  { "main": "Paneer Tikka", "side": "Veg Pulao", "drink": "Coke", "calories": 710, "rating": 4.0, "taste": "Savory" },
+  { "main": "Thai Curry", "side": "Jasmine Rice", "drink": "Coconut Water", "calories": 690, "rating": 4.4, "taste": "Spicy" },
+  { "main": "Chole Bhature", "side": "Salad", "drink": "Buttermilk", "calories": 800, "rating": 4.6, "taste": "Savory" },
+  { "main": "Dal Makhani", "side": "Jeera Rice", "drink": "Sweet Lassi", "calories": 600, "rating": 4.1, "taste": "Sweet" }
+]
