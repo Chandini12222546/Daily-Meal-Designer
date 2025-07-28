@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weekly Meal Planner</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #222;
+      margin-bottom: 40px;
+    }
+
+    .timeline {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .day-block {
+      background-color: #fff;
+      border-left: 5px solid #555;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .day-block h2 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .combo {
+      margin: 12px 0;
+      padding: 10px;
+      background: #f9f9f9;
+      border-left: 4px solid #bbb;
+      border-radius: 6px;
+    }
+
+    .combo strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #000;
+    }
+
+    .meta {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .taste {
+      display: inline-block;
+      padding: 4px 8px;
+      font-size: 12px;
+      border-radius: 4px;
+      margin-left: 8px;
+    }
+
+    .Sweet { background: #ffe6ec; color: #c2185b; }
+    .Spicy { background: #ffe4cc; color: #e65100; }
+    .Savory { background: #e0f7fa; color: #00695c; }
+    .Mixed  { background: #ede7f6; color: #512da8; }
+
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      background-color: #333;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #111;
+    }
+
+    @media (max-width: 600px) {
+      .day-block { padding: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌿 Weekly Meal Combo Planner</h1>
+  <button onclick="generateCombos()">🔄 Generate New Week</button>
+  <div class="timeline" id="timeline"></div>
+
+  <script>
+    const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+    const mains = ["Zorla Noodles", "Fyro Curry", "Nimble Beans", "Plaxa Pilaf", "Gravix Lentils", "Tarf Tandoor", "Jorji Wrap"];
+    const sides = ["Glint Chips", "Raga Slaw", "Minted Roots", "Bluff Pickle", "Nubbin Mash", "Clove Crisp", "Boko Fries"];
+    const drinks = ["Bora Punch", "Fizzbean Soda", "Lunari Tea", "Glowmint Brew", "Wisp Water", "Drumble Shake", "Twinkle Juice"];
+
+    const tasteTypes = ["Sweet", "Spicy", "Savory"];
+
+    function randomFrom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function randomRating() {
+      return (Math.random() * 1.5 + 3.5).toFixed(1);
+    }
+
+    function getTasteProfile() {
+      const counts = { Sweet: 0, Spicy: 0, Savory: 0 };
+      for (let i = 0; i < 3; i++) {
+        counts[randomFrom(tasteTypes)]++;
+      }
+      const max = Math.max(...Object.values(counts));
+      const top = Object.keys(counts).filter(k => counts[k] === max);
+      return top.length === 1 ? top[0] : "Mixed";
+    }
+
+    function generateCombos() {
+      const timeline = document.getElementById("timeline");
+      timeline.innerHTML = "";
+
+      weekdays.forEach(day => {
+        const preferredTaste = randomFrom(tasteTypes);
+        let combosHTML = "";
+
+        for (let i = 0; i < 3; i++) {
+          const main = randomFrom(mains);
+          const side = randomFrom(sides);
+          const drink = randomFrom(drinks);
+          const calories = Math.floor(Math.random() * 200) + 550;
+          const taste = getTasteProfile();
+          const rating = randomRating();
+
+          combosHTML += `
+            <div class="combo">
+              <strong>🍽 ${main}, 🥗 ${side}, 🥤 ${drink}</strong>
+              <div class="meta">
+                ${calories} Calories · ⭐ ${rating} Rating
+                <span class="taste ${taste}">${taste}</span>
+              </div>
+            </div>`;
+        }
+
+        timeline.innerHTML += `
+          <div class="day-block">
+            <h2>${day} <span class="taste ${preferredTaste}">Preferred: ${preferredTaste}</span></h2>
+            ${combosHTML}
+          </div>`;
+      });
+    }
+
+    generateCombos();
+  </script>
+</body>
+</html>
